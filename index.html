@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro de acceso vascular urgente</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="apple-mobile-web-app-title" content="GTAV Princesa">
+<meta name="theme-color" content="#1c5f66">
+<meta property="og:title" content="Registro de acceso vascular urgente">
+<meta property="og:description" content="Registro clínico prospectivo de accesos vasculares urgentes">
+<meta property="og:image" content="https://dgutim.github.io/Accesovenosourgente/preview.jpg">
+<meta property="og:url" content="https://dgutim.github.io/Accesovenosourgente/">
+<meta property="og:type" content="website">
+<style>
+
+  :root{
+    --bg:#f2f7f8;
+    --bg-2:#f8fbfb;
+    --card:#ffffff;
+    --card-soft:#f7fbfb;
+    --text:#173136;
+    --muted:#597177;
+    --line:#d4e2e4;
+    --accent:#1c5f66;
+    --accent-2:#2f7e85;
+    --section:#dfecef;
+    --section-2:#cfe1e4;
+    --accent-soft:#e7f3f4;
+    --danger:#b42318;
+    --shadow:0 12px 32px rgba(19, 52, 56, 0.08);
+    --radius:18px;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);
+    color:var(--text);
+    line-height:1.35;
+  }
+  .hero{
+    background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);
+    color:#fff;
+    padding:24px 14px 72px;
+    box-shadow:inset 0 -1px 0 rgba(255,255,255,.12);
+  }
+  .hero-inner,.wrap{max-width:780px;margin:0 auto}
+  .hero-inner{text-align:center}
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.18);
+    font-size:.86rem;
+    font-weight:700;
+    letter-spacing:.01em;
+    backdrop-filter:blur(6px);
+  }
+  h1{
+    margin:16px 0 0;
+    text-align:center;
+    font-size:clamp(1.45rem, 2vw + 1rem, 2rem);
+    line-height:1.1;
+    letter-spacing:-.01em;
+  }
+
+  .hero-counter{
+    margin:16px auto 0;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 14px;
+    border-radius:999px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(6px);
+  }
+  .hero-counter-label{
+    font-size:.9rem;
+    font-weight:600;
+    opacity:.92;
+  }
+  .hero-counter-value{
+    min-width:2.5rem;
+    padding:4px 10px;
+    border-radius:999px;
+    background:rgba(255,255,255,.18);
+    font-weight:800;
+    font-size:1rem;
+  }
+  .wrap{
+    margin-top:-44px;
+    padding:0 12px 28px;
+  }
+  .card{
+    background:var(--card);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.7);
+  }
+  form{padding:14px 14px 22px}
+  .section{
+    margin-top:16px;
+    padding:16px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:var(--card);
+  }
+  .section:first-child{margin-top:0}
+  .section-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:-2px -2px 16px;
+    padding:12px 14px;
+    border-radius:16px;
+    background:linear-gradient(135deg,var(--section) 0%,var(--section-2) 100%);
+    color:#12474d;
+    box-shadow:0 8px 18px rgba(31,95,102,.10);
+    border:1px solid rgba(28,95,102,.10);
+  }
+  .section-header::before{
+    content:attr(data-step);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 34px;
+    width:34px;
+    height:34px;
+    border-radius:999px;
+    background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.72);
+    box-shadow:0 6px 14px rgba(28,95,102,.18);
+    font-size:.92rem;
+    font-weight:800;
+    line-height:1;
+  }
+  .section h2{
+    margin:0;
+    font-size:1rem;
+    line-height:1.2;
+    color:#12474d;
+  }
+  .section-note{
+    margin:4px 0 0;
+    color:#45666b;
+    font-size:.85rem;
+  }
+  label{
+    display:block;
+    font-weight:700;
+    margin:16px 0 8px;
+    font-size:.96rem;
+  }
+  input[type="number"], select{
+    width:100%;
+    min-height:52px;
+    padding:14px 14px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    font-size:16px;
+    background:#fff;
+    color:var(--text);
+    outline:none;
+    transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    appearance:none;
+    -webkit-appearance:none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, #6b7280 50%),
+      linear-gradient(135deg, #6b7280 50%, transparent 50%);
+    background-position:
+      calc(100% - 18px) calc(50% - 3px),
+      calc(100% - 12px) calc(50% - 3px);
+    background-size:6px 6px, 6px 6px;
+    background-repeat:no-repeat;
+    padding-right:38px;
+  }
+  input[type="number"]{
+    appearance:textfield;
+    -webkit-appearance:none;
+    background-image:none;
+    padding-right:14px;
+  }
+  input[type="number"]:focus, select:focus{
+    border-color:#8bb4ff;
+    box-shadow:0 0 0 4px rgba(21,94,239,.12);
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+    align-items:start;
+  }
+
+  .grid > div > label:first-child{margin-top:0}
+  .section > label:first-of-type{margin-top:0}
+  .section > .grid + label{margin-top:16px}
+  .checks{
+    display:grid;
+    gap:10px;
+    margin-top:8px;
+  }
+  .check{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:12px 13px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--card-soft);
+  }
+  .check input{
+    margin-top:3px;
+    transform:scale(1.12);
+    accent-color:var(--accent);
+  }
+  .hint{
+    font-size:.88rem;
+    color:var(--muted);
+    margin:10px 2px 0;
+  }
+  .req::after{content:" *";color:var(--danger)}
+  .hidden{display:none!important}
+  .submit-wrap{
+    position:sticky;
+    bottom:0;
+    margin-top:18px;
+    padding-top:14px;
+    padding-bottom:calc(6px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.92) 22%,#fff 100%);
+  }
+  button{
+    width:100%;
+    min-height:56px;
+    border:0;
+    border-radius:16px;
+    padding:16px 18px;
+    background:linear-gradient(135deg,#114b52 0%,#1d6670 100%);
+    color:#fff;
+    font-size:1rem;
+    font-weight:800;
+    letter-spacing:.01em;
+    cursor:pointer;
+    box-shadow:0 10px 22px rgba(17,75,82,.22);
+    transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  }
+  button:active{transform:translateY(1px);filter:brightness(.98)}
+  .submit-note{
+    margin:10px 4px 0;
+    font-size:.84rem;
+    color:var(--muted);
+    text-align:center;
+    line-height:1.35;
+  }
+  .privacy{
+    margin-top:18px;
+    padding:16px;
+    border-radius:18px;
+    background:var(--card-soft);
+    border:1px solid var(--line);
+  }
+  .privacy h3{margin:0 0 10px;font-size:.98rem}
+  .privacy p{
+    margin:0 0 10px;
+    line-height:1.5;
+    color:#334155;
+    font-size:.92rem;
+  }
+  .privacy p:last-child{margin-bottom:0}
+  .privacy a{color:var(--accent);text-decoration:none;font-weight:700}
+  .privacy a:hover{text-decoration:underline}
+  .footer-note{
+    margin-top:12px;
+    font-size:.82rem;
+    color:var(--muted);
+    text-align:center;
+  }
+
+  
+  .action-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-top:12px;
+  }
+  .secondary-btn{
+    background:linear-gradient(135deg,#49666b 0%,#6d858a 100%);
+    box-shadow:0 10px 22px rgba(73,102,107,.18);
+  }
+  .submit-status{
+    margin-top:12px;
+    padding:14px 16px;
+    border-radius:14px;
+    border:1px solid #b7e0c0;
+    background:#edf9f0;
+    color:#156b2f;
+    font-weight:700;
+    text-align:center;
+  }
+  .submit-status.error{
+    border-color:#f1c0bd;
+    background:#fff3f2;
+    color:#b42318;
+  }
+
+  .hero-actions{
+    margin:16px auto 0;
+    max-width:320px;
+  }
+  .hero-download-btn{
+    width:100%;
+    min-height:52px;
+    border:1px solid rgba(255,255,255,.24);
+    border-radius:16px;
+    padding:14px 18px;
+    background:rgba(255,255,255,.16);
+    color:#fff;
+    font-size:1rem;
+    font-weight:800;
+    letter-spacing:.01em;
+    cursor:pointer;
+    box-shadow:0 10px 22px rgba(17,75,82,.16);
+    backdrop-filter:blur(6px);
+  }
+  .hero-download-btn:disabled{
+    opacity:.75;
+    cursor:wait;
+  }
+
+@media (max-width:720px){
+    .grid{grid-template-columns:1fr}
+    .section-header{align-items:flex-start}
+    .hero{padding:16px 12px 66px}
+    .wrap{padding:0 10px 22px;margin-top:-38px}
+    form{padding:12px 12px 20px}
+    .section{padding:14px;border-radius:18px}
+    h1{font-size:1.5rem}
+    .action-row{grid-template-columns:1fr}
+  }
+
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">GTAV · Hospital Universitario de La Princesa</div>
+      <h1>Registro de acceso vascular urgente</h1>
+    <div class="hero-counter" aria-live="polite">
+      <span class="hero-counter-label">Registros enviados</span>
+      <span class="hero-counter-value" id="registrosCount">—</span>
+    </div>
+    <div class="hero-actions">
+      <button type="button" id="downloadExcelBtnTop" class="hero-download-btn">Descargar Excel</button>
+    </div>
+      
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+
+      <form id="registroForm">
+        <div class="section">
+          <div class="section-header" data-step="1">
+            <div>
+              <h2>1. Datos básicos y contexto asistencial</h2>
+              <p class="section-note">Información general del episodio de solicitud.</p>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div>
+              <label for="edad" class="req">Edad (años)</label>
+              <input id="edad" name="edad" type="number" min="0" max="120" required>
+            </div>
+            <div>
+              <label for="sexo">Sexo</label>
+              <select id="sexo" name="sexo">
+                <option value="">Seleccionar</option>
+                <option>Mujer</option>
+                <option>Varón</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="ubicacion" class="req">Ubicación del paciente</label>
+          <select id="ubicacion" name="ubicacion" required>
+            <option value="">Seleccionar</option>
+            <option>Urgencias</option>
+            <option>Planta de hospitalización</option>
+            <option>UCI / UCRI</option>
+            <option>Reanimación</option>
+            <option>CMA</option>
+          </select>
+
+          <label for="servicio" class="req">Servicio solicitante</label>
+          <select id="servicio" name="servicio" required>
+            <option value="">Seleccionar</option>
+            <option>Urgencias</option>
+            <option>Medicina Interna</option>
+            <option>Oncología</option>
+            <option>Hematología</option>
+            <option>UCI</option>
+            <option>Cirugía General</option>
+            <option>Digestivo</option>
+            <option>Geriatría</option>
+            <option>Nefrología</option>
+            <option>Traumatología</option>
+            <option>Neurología</option>
+            <option>Cardiología</option>
+            <option>Neumología</option>
+            <option>Enfermedades Infecciosas</option>
+            <option>Endocrinología</option>
+            <option>Reumatología</option>
+            <option>Cuidados paliativos</option>
+          </select>
+
+          <label for="momento">Momento de la solicitud</label>
+          <select id="momento" name="momento">
+            <option value="">Seleccionar</option>
+            <option>Laborable mañana</option>
+            <option>Laborable tarde</option>
+            <option>Guardia nocturna</option>
+            <option>Fin de semana / festivo</option>
+          </select>
+
+          <label for="momentoCanalizacion">Momento de la canalización</label>
+          <select id="momentoCanalizacion" name="momentoCanalizacion">
+            <option value="">Seleccionar</option>
+            <option>Laborable mañana</option>
+            <option>Laborable tarde</option>
+            <option>Guardia nocturna</option>
+            <option>Fin de semana / festivo</option>
+          </select>
+        </div>
+
+        <div class="section">
+          <div class="section-header" data-step="2">
+            <div>
+              <h2>2. Indicación y terapia</h2>
+              <p class="section-note">Variables relacionadas con la indicación clínica del acceso.</p>
+            </div>
+          </div>
+
+          <label for="motivo" class="req">Motivo principal de la solicitud</label>
+          <select id="motivo" name="motivo" required>
+            <option value="">Seleccionar</option>
+            <option>Antecedentes previos de acceso venoso difícil</option>
+            <option>Fracaso de múltiples intentos previos</option>
+            <option>Necesidad de terapia intravenosa urgente</option>
+            <option>Fármacos irritantes / vesicantes</option>
+            <option>Perfusión intravenosa prolongada</option>
+            <option>Monitorización / acceso de seguridad</option>
+            <option>Extracciones frecuentes</option>
+          </select>
+
+          <label for="duracion" class="req">Duración prevista de la terapia</label>
+          <select id="duracion" name="duracion" required>
+            <option value="">Seleccionar</option>
+            <option>&lt; 6 días</option>
+            <option>6 días – 4 semanas</option>
+            <option>&gt; 4 semanas</option>
+          </select>
+
+          <div class="grid">
+            <div>
+              <label for="osmolaridad" class="req">¿Existe alguna perfusión con osmolaridad ≥ 600 mOsm/L?</label>
+              <select id="osmolaridad" name="osmolaridad" required>
+                <option value="">Seleccionar</option>
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div>
+              <label for="ph" class="req">¿Existe algún fármaco con pH &lt; 5 o &gt; 9?</label>
+              <select id="ph" name="ph" required>
+                <option value="">Seleccionar</option>
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="vesicante" class="req">¿Existe algún fármaco irritante o vesicante?</label>
+          <select id="vesicante" name="vesicante" required>
+            <option value="">Seleccionar</option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div class="section">
+          <div class="section-header" data-step="3">
+            <div>
+              <h2>3. Factores del paciente</h2>
+              <p class="section-note">Marcar si alguno de los siguientes factores está presente.</p>
+            </div>
+          </div>
+
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="factores" value="Acceso venoso difícil (DIVA)"> <span>Acceso venoso difícil (DIVA)</span></label>
+            <label class="check"><input type="checkbox" name="factores" value="Paciente crítico / inestable"> <span>Paciente crítico / inestable</span></label>
+            <label class="check"><input type="checkbox" name="factores" value="Enfermedad crónica con extracciones frecuentes"> <span>Enfermedad crónica con extracciones frecuentes</span></label>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header" data-step="4">
+            <div>
+              <h2>4. Procedimiento y resultado inmediato</h2>
+              <p class="section-note">La adecuación al protocolo se revisará posteriormente por el equipo investigador.</p>
+            </div>
+          </div>
+
+          <label for="via" class="req">Vía canalizada</label>
+          <select id="via" name="via" required>
+            <option value="">Seleccionar</option>
+            <option value="Acceso venoso periférico">Acceso venoso periférico</option>
+            <option value="Midline">Midline</option>
+            <option value="PICC">PICC</option>
+            <option value="Vía venosa central">Vía venosa central</option>
+            <option value="No se consigue acceso">No se consigue acceso</option>
+          </select>
+
+          <div id="bloqueExtremidad" class="hidden">
+            <label for="extremidad" class="req">Localización</label>
+            <select id="extremidad" name="extremidad">
+              <option value="">Seleccionar</option>
+              <option>Miembro superior derecho</option>
+              <option>Miembro superior izquierdo</option>
+              <option>Miembro inferior derecho</option>
+              <option>Miembro inferior izquierdo</option>
+            </select>
+          </div>
+
+          <div class="grid hidden" id="bloqueCvc">
+            <div>
+              <label for="cvcVena" class="req">Tipo de vía venosa central</label>
+              <select id="cvcVena" name="cvcVena">
+                <option value="">Seleccionar</option>
+                <option>Vena yugular interna</option>
+                <option>Vena subclavia</option>
+                <option>Vena femoral</option>
+              </select>
+            </div>
+            <div>
+              <label for="cvcLado" class="req">Lado</label>
+              <select id="cvcLado" name="cvcLado">
+                <option value="">Seleccionar</option>
+                <option>Derecho</option>
+                <option>Izquierdo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div>
+              <label for="eco" class="req">Ecografía</label>
+              <select id="eco" name="eco" required>
+                <option value="">Seleccionar</option>
+                <option>Sí</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div>
+              <label for="intentos" class="req">Número de intentos</label>
+              <select id="intentos" name="intentos" required>
+                <option value="">Seleccionar</option>
+                <option>1</option>
+                <option>2</option>
+                <option>≥ 3</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="operador">Profesional que realiza la técnica</label>
+          <select id="operador" name="operador">
+            <option value="">Seleccionar</option>
+            <option>Residente</option>
+            <option>Adjunto</option>
+          </select>
+
+          <label>Incidencias inmediatas</label>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="incidencias" value="Ninguna"> <span>Ninguna</span></label>
+            <label class="check"><input type="checkbox" name="incidencias" value="Punción arterial"> <span>Punción arterial</span></label>
+            <label class="check"><input type="checkbox" name="incidencias" value="Hematoma"> <span>Hematoma</span></label>
+            <label class="check"><input type="checkbox" name="incidencias" value="Malposición"> <span>Malposición</span></label>
+            <label class="check"><input type="checkbox" name="incidencias" value="Fracaso técnico"> <span>Fracaso técnico</span></label>
+          </div>
+                  </div>
+
+        <div class="submit-wrap">
+          <div class="action-row">
+            <button type="submit" id="submitBtn">Enviar registro</button>
+          </div>
+          <div id="submitStatus" class="submit-status hidden" aria-live="polite"></div>
+          <p class="submit-note">Al enviar, la información se almacenará en una base de datos del estudio con fines de investigación y mejora asistencial, sin incluir identificadores directos del paciente.</p>
+        </div>
+
+        <div class="privacy">
+          <h3>Política de privacidad</h3>
+          <p>Este formulario está destinado exclusivamente a la recogida de datos clínicos estructurados del estudio de acceso vascular urgente del GTAV. No deben introducirse nombres, número de historia clínica, fecha de nacimiento completa ni otros identificadores directos del paciente.</p>
+          <p>Los datos recogidos se incorporarán a una base de datos del estudio y serán tratados con medidas orientadas a preservar la confidencialidad, la minimización de datos y la privacidad de los pacientes, conforme a la normativa aplicable y al circuito ético del proyecto.</p>
+          <p>El acceso a la base de datos estará restringido al equipo investigador autorizado. Para dudas, incidencias o solicitud de información relacionada con el formulario, puede contactarse con <a href="mailto:diegogutimartinez@gmail.com">diegogutimartinez@gmail.com</a>.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp, getCountFromServer, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import * as XLSX from "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/+esm";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAcoFXyxJ2_Keu2K5vtn4Tq2C_OmfhGJ5w",
+  authDomain: "gtav-princesa.firebaseapp.com",
+  projectId: "gtav-princesa",
+  storageBucket: "gtav-princesa.firebasestorage.app",
+  messagingSenderId: "423402024206",
+  appId: "1:423402024206:web:2e2e0f6ff3e0ebf7323b5f"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const via = document.getElementById('via');
+const bloqueExtremidad = document.getElementById('bloqueExtremidad');
+const bloqueCvc = document.getElementById('bloqueCvc');
+const extremidad = document.getElementById('extremidad');
+const cvcVena = document.getElementById('cvcVena');
+const cvcLado = document.getElementById('cvcLado');
+const form = document.getElementById('registroForm');
+const statusBox = document.getElementById('submitStatus');
+const submitBtn = document.getElementById('submitBtn');
+const countEl = document.getElementById('registrosCount');
+const downloadExcelBtn = document.getElementById('downloadExcelBtnTop');
+
+function actualizarLocalizacion(){
+  const v = via.value;
+  bloqueExtremidad.classList.add('hidden');
+  bloqueCvc.classList.add('hidden');
+
+  extremidad.required = false;
+  cvcVena.required = false;
+  cvcLado.required = false;
+
+  extremidad.value = '';
+  cvcVena.value = '';
+  cvcLado.value = '';
+
+  if(['Acceso venoso periférico','Midline','PICC'].includes(v)){
+    bloqueExtremidad.classList.remove('hidden');
+    extremidad.required = true;
+  }
+
+  if(v === 'Vía venosa central'){
+    bloqueCvc.classList.remove('hidden');
+    cvcVena.required = true;
+    cvcLado.required = true;
+  }
+}
+
+function showStatus(message, isError = false){
+  statusBox.textContent = message;
+  statusBox.classList.remove('hidden', 'error');
+  if(isError) statusBox.classList.add('error');
+}
+
+function collectFormData(){
+  const data = Object.fromEntries(new FormData(form).entries());
+  const incidencias = Array.from(document.querySelectorAll('input[name="incidencias"]:checked')).map(i => i.value);
+  const factores = Array.from(document.querySelectorAll('input[name="factores"]:checked')).map(i => i.value);
+  data.incidencias = incidencias;
+  data.factores = factores;
+  data.fecha_envio = serverTimestamp();
+  data.centro = 'Hospital Universitario de La Princesa';
+  data.version_formulario = 'excel-export-v1';
+  return data;
+}
+
+
+function formatTimestamp(value){
+  if(!value) return '';
+  if(typeof value?.toDate === 'function'){
+    return value.toDate().toLocaleString('es-ES');
+  }
+  if(value?.seconds){
+    return new Date(value.seconds * 1000).toLocaleString('es-ES');
+  }
+  if(value instanceof Date){
+    return value.toLocaleString('es-ES');
+  }
+  return String(value);
+}
+
+function normaliseArray(value){
+  if(Array.isArray(value)) return value.join(' | ');
+  return value ?? '';
+}
+
+async function downloadExcel(){
+  downloadExcelBtn.disabled = true;
+  downloadExcelBtn.textContent = 'Preparando...';
+  showStatus('Preparando Excel con todos los registros de Firebase...');
+
+  try {
+    const snap = await getDocs(collection(db, 'registros'));
+    const docs = snap.docs.slice().sort((a, b) => {
+      const aSec = a.data()?.fecha_envio?.seconds ?? 0;
+      const bSec = b.data()?.fecha_envio?.seconds ?? 0;
+      return bSec - aSec;
+    });
+
+    const rows = docs.map((doc, index) => {
+      const d = doc.data();
+      return {
+        'Nº': index + 1,
+        'Fecha de envío': formatTimestamp(d.fecha_envio),
+        'Edad': d.edad ?? '',
+        'Sexo': d.sexo ?? '',
+        'Ubicación del paciente': d.ubicacion ?? '',
+        'Servicio solicitante': d.servicio ?? '',
+        'Momento de la solicitud': d.momento ?? '',
+        'Momento de la canalización': d.momentoCanalizacion ?? '',
+        'Motivo principal': d.motivo ?? '',
+        'Duración prevista': d.duracion ?? '',
+        'Osmolaridad ≥ 600 mOsm/L': d.osmolaridad ?? '',
+        'pH < 5 o > 9': d.ph ?? '',
+        'Fármaco irritante o vesicante': d.vesicante ?? '',
+        'Factores del paciente': normaliseArray(d.factores),
+        'Vía canalizada': d.via ?? '',
+        'Localización': d.extremidad ?? '',
+        'Tipo de CVC': d.cvcVena ?? '',
+        'Lado CVC': d.cvcLado ?? '',
+        'Ecografía': d.eco ?? '',
+        'Número de intentos': d.intentos ?? '',
+        'Profesional': d.operador ?? '',
+        'Incidencias inmediatas': normaliseArray(d.incidencias),
+        'Centro': d.centro ?? '',
+        'Versión formulario': d.version_formulario ?? '',
+        'ID registro': doc.id
+      };
+    });
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(rows.length ? rows : [{ 'Sin registros': 'No hay datos todavía' }]);
+    XLSX.utils.book_append_sheet(wb, ws, 'Registros GTAV');
+
+    const date = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const fileName = `registros_GTAV_${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}_${pad(date.getHours())}-${pad(date.getMinutes())}.xlsx`;
+    XLSX.writeFile(wb, fileName);
+    showStatus(`Excel descargado correctamente (${rows.length} registros)`);
+  } catch (error) {
+    console.error(error);
+    showStatus('No se pudo descargar el Excel completo de Firebase. Revisa permisos de lectura de Firestore.', true);
+  } finally {
+    downloadExcelBtn.disabled = false;
+    downloadExcelBtn.textContent = 'Descargar Excel';
+  }
+}
+
+async function updateCounter(){
+  try {
+    const snap = await getCountFromServer(collection(db, 'registros'));
+    countEl.textContent = snap.data().count.toString();
+  } catch (e) {
+    countEl.textContent = '—';
+    console.error('No se pudo cargar el contador', e);
+  }
+}
+
+via.addEventListener('change', actualizarLocalizacion);
+actualizarLocalizacion();
+
+downloadExcelBtn.addEventListener('click', downloadExcel);
+
+const incidenciaChecks = Array.from(document.querySelectorAll('input[name="incidencias"]'));
+incidenciaChecks.forEach(ch => {
+  ch.addEventListener('change', e => {
+    if(e.target.value === 'Ninguna' && e.target.checked){
+      incidenciaChecks.forEach(x => { if(x.value !== 'Ninguna') x.checked = false; });
+    }
+    if(e.target.value !== 'Ninguna' && e.target.checked){
+      const ninguna = incidenciaChecks.find(x => x.value === 'Ninguna');
+      if(ninguna) ninguna.checked = false;
+    }
+  });
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  statusBox.classList.add('hidden');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+
+  try {
+    const datos = collectFormData();
+    await addDoc(collection(db, 'registros'), datos);
+    form.reset();
+    actualizarLocalizacion();
+    incidenciaChecks.forEach(x => x.checked = false);
+    showStatus('Registro enviado correctamente');
+    await updateCounter();
+  } catch (error) {
+    console.error(error);
+    showStatus('Error al enviar registro', true);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar registro';
+  }
+});
+
+updateCounter();
+</script>
+</body>
+</html>
